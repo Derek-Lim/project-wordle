@@ -3,9 +3,12 @@ import React from 'react';
 import { sample } from '../../utils';
 import { WORDS } from '../../data';
 import { NUM_OF_GUESSES_ALLOWED } from '../../constants';
+import { ALPHABET } from '../../constants';
+import { checkGuess } from '../../game-helpers';
 
 import GuessInput from '../GuessInput';
 import GuessResults from '../GuessResults';
+import Keyboard from '../Keyboard';
 import WonBanner from '../WonBanner';
 import LostBanner from '../LostBanner';
 
@@ -20,6 +23,10 @@ function Game() {
 
   const [guesses, setGuesses] = React.useState([]);
 
+  const [alphabetStatus, setAlphabetStatus] = React.useState(
+    ALPHABET.map((letter) => ({ letter, status: null }))
+  );
+
   function handleSubmitGuess(tentativeGuess) {
     const nextGuesses = [...guesses, tentativeGuess];
     setGuesses(nextGuesses);
@@ -29,6 +36,25 @@ function Game() {
     } else if (nextGuesses.length >= NUM_OF_GUESSES_ALLOWED) {
       setGameStatus('lost');
     }
+
+    const letterEvaluations = checkGuess(tentativeGuess, answer);
+    updateAlphabetStatus(letterEvaluations);
+  }
+
+  function updateAlphabetStatus(letterEvaluations) {
+    const updatedAlphabet = [...alphabetStatus];
+
+    letterEvaluations.forEach((evaluation) => {
+      const alphaIndex = updatedAlphabet.findIndex(
+        (entry) => entry.letter === evaluation.letter
+      );
+
+      if (updatedAlphabet[alphaIndex].status !== 'correct') {
+        updatedAlphabet[alphaIndex].status = evaluation.status;
+      }
+    });
+
+    setAlphabetStatus(updatedAlphabet);
   }
 
   return (
@@ -38,6 +64,7 @@ function Game() {
         gameStatus={gameStatus}
         handleSubmitGuess={handleSubmitGuess}
       />
+      <Keyboard alphabetStatus={alphabetStatus} />
       {gameStatus === 'won' && <WonBanner numOfGuesses={guesses.length} />}
       {gameStatus === 'lost' && <LostBanner answer={answer} />}
     </>

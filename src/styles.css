@@ -124,17 +124,17 @@ h1 {
   --radius: 0px 0px 0px 4px;
 }
 
-.cell.correct {
+.cell.correct, .key.correct {
   background: var(--color-success);
   border-color: var(--color-success);
   color: white;
 }
-.cell.incorrect {
+.cell.incorrect, .key.incorrect {
   background: var(--color-gray-300);
   border-color: var(--color-gray-300);
   color: white;
 }
-.cell.misplaced {
+.cell.misplaced, .key.misplaced {
   background: var(--color-warning);
   border-color: var(--color-warning);
   color: white;
@@ -229,4 +229,19 @@ h1 {
   to {
     transform: translateY(0%);
   }
+}
+
+/* Keyboard */
+.key-row {
+  text-align: center;
+}
+
+.key {
+  height: 32px;
+  width: 32px;
+  background: var(--color-gray-900);
+  border-radius: 5px;
+  font-weight: bold;
+  margin: 2px;
+  text-align: center;
 }
