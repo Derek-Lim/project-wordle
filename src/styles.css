@@ -230,3 +230,43 @@ h1 {
     transform: translateY(0%);
   }
 }
+
+/*
+  Stretch goal styles
+*/
+.keyboard {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.keyboard-row {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+}
+
+.keyboard .letter {
+  height: 2rem;
+  width: 2rem;
+  background-color: var(--color-gray-900);
+  border-radius: 4px;
+  place-content: center;
+  text-align: center;
+  font-weight: 600;
+}
+
+.keyboard .letter.correct {
+  background: var(--color-success);
+  color: white;
+}
+
+.keyboard .letter.incorrect {
+  background: var(--color-gray-300);
+  color: white;
+}
+
+.keyboard .letter.misplaced {
+  background: var(--color-warning);
+  color: white;
+}

@@ -5,11 +5,12 @@ import { range } from '../../utils';
 
 import Guess from '../Guess';
 
-function GuessResults({ guesses, answer }) {
+function GuessResults({ validatedGuesses }) {
+  console.log(validatedGuesses);
   return (
     <div className="guess-results">
       {range(NUM_OF_GUESSES_ALLOWED).map((num) => (
-        <Guess key={num} value={guesses[num]} answer={answer} />
+        <Guess key={num} value={validatedGuesses[num]} />
       ))}
     </div>
   );
