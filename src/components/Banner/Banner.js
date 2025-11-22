@@ -1,7 +1,14 @@
 import React from 'react';
 
-function Banner({ status, children }) {
-  return <div className={`${status} banner`}>{children}</div>;
+import RestartButton from '../RestartButton';
+
+function Banner({ status, restartGame, children }) {
+  return (
+    <div className={`${status} banner`}>
+      {children}
+      <RestartButton restartGame={restartGame} />
+    </div>
+  );
 }
 
 export default Banner;

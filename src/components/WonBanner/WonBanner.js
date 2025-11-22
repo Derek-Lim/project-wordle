@@ -2,9 +2,9 @@ import React from 'react';
 
 import Banner from '../Banner';
 
-function WonBanner({ numOfGuesses }) {
+function WonBanner({ numOfGuesses, restartGame }) {
   return (
-    <Banner status="happy">
+    <Banner status="happy" restartGame={restartGame}>
       <p>
         <strong>Congratulations!</strong> Got it in{' '}
         <strong>
